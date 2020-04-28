@@ -1,1 +1,0 @@
-{"version":3,"file":"timesheet.d.ts","sourceRoot":"","sources":["../src/timesheet.tsx"],"names":[],"mappings":"AACA,OAAc,EAAE,EAAE,EAAE,MAAM,OAAO,CAAA;AACjC,OAAO,EAAE,SAAS,EAAa,MAAM,oBAAoB,CAAA;AAOzD,UAAU,cAAc;IACpB,WAAW,EAAE,SAAS,EAAE,CAAA;CAC3B;AAGD,QAAA,MAAM,SAAS,EAAE,EAAE,CAAC,cAAc,CA0GjC,CAAA;AAED,eAAe,SAAS,CAAA"}

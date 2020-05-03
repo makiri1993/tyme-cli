@@ -83,7 +83,7 @@ fn main() -> Result<(), ExitFailure> {
         first_day,
         last_day,
     };
-
+    let initial_directory = env::current_dir().unwrap();
     let mut cd = Command::new("cd");
     let root = Path::new("./timesheet");
     assert!(env::set_current_dir(&root).is_ok());
@@ -96,8 +96,9 @@ fn main() -> Result<(), ExitFailure> {
 
     let mut echo_hello = Command::new("yarn");
     let output = echo_hello
-        .arg("dev")
+        .arg("generate_pdf")
         .arg(serde_json::to_string(&time_export).unwrap())
+        .arg(initial_directory)
         .output()
         .expect("Command wasn't run successfully");
 

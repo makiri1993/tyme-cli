@@ -3,9 +3,6 @@ import React, { FC } from "react"
 import { TimeEntry } from "./models/TymeEntry"
 import { getSumOfHours, prettifyHoursAndMinutes } from "./helpers/tyme"
 import { flexbox, rowCell } from "./helpers/style"
-import { weekNumber } from "weeknumber"
-
-// Create styles
 
 interface TimeSheetProps {
     firstDay: string
@@ -15,26 +12,6 @@ interface TimeSheetProps {
 
 // Create Document Component
 const TimeSheet: FC<TimeSheetProps> = ({ entries, firstDay, lastDay }) => {
-    // Font.register({
-    //     family: "SF Pro",
-    //     fonts: [
-    //         {
-    //             src: `src/font/JetBrainsMono-Medium.ttf`
-    //         },
-    //         {
-    //             src: `src/font/JetBrainsMono-Bold.ttf`,
-    //             fontWeight: "bold"
-    //         }
-    //     ]
-    // })
-
-    // const entries:  = tymeEntries.map(entry => {
-    //     const date = new Date(entry.date)
-    //     console.log("date", date)
-    //     return { ...entry, ...transformDurationToHoursAndMinutes(entry.duration), date, week: weekNumber(date) }
-    // })
-    // console.log("entries", entries)
-
     const header = () => (
         <View style={{ ...flexbox({ flexDirection: "row" }), marginBottom: 4 }}>
             {rowCell("Project", true)}
@@ -65,11 +42,6 @@ const TimeSheet: FC<TimeSheetProps> = ({ entries, firstDay, lastDay }) => {
     }
 
     const fullAmountOfHours = getSumOfHours(entries)
-
-    // const firstDayOfPeriod = getFirstDateOfWeek([...entries].find((_, index) => index === 0)?.date)
-    // console.log("firstDayOfPeriod", firstDayOfPeriod)
-    // const lastDayOfPeriod = getLastDateOfWeek(entries.find((_, index) => index === entries.length - 1)?.date)
-    // console.log("lastDayOfPeriod", lastDayOfPeriod)
 
     const renderRows = () => {
         return entries.map((entry, index, entries) => {

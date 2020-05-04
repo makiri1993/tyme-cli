@@ -1,4 +1,3 @@
-// "use strict"
 import ReactPDF from "@react-pdf/renderer"
 import React from "react"
 import { TimeEntry } from "./models/TymeEntry"

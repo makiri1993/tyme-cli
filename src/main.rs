@@ -84,19 +84,18 @@ fn main() -> Result<(), ExitFailure> {
         last_day,
     };
     let initial_directory = env::current_dir().unwrap();
-    let mut cd = Command::new("cd");
-    let root = Path::new("./timesheet");
-    assert!(env::set_current_dir(&root).is_ok());
-    println!(
-        "Successfully changed working directory to {}!",
-        root.display()
-    );
+    // let mut cd = Command::new("cd");
+    // let root = Path::new("./timesheet");
+    // assert!(env::set_current_dir(&root).is_ok());
+    // println!(
+    //     "Successfully changed working directory to {}!",
+    //     root.display()
+    // );
 
-    cd.arg("timesheet").output().expect("Failed to execute.");
+    // cd.arg("timesheet").output().expect("Failed to execute.");
 
-    let mut echo_hello = Command::new("yarn");
+    let mut echo_hello = Command::new("generate_pdf");
     let output = echo_hello
-        .arg("generate_pdf")
         .arg(serde_json::to_string(&time_export).unwrap())
         .arg(initial_directory)
         .output()

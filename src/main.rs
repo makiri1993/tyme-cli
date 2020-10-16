@@ -72,10 +72,6 @@ fn main() -> Result<(), ExitFailure> {
         .map(transform_tyme_entry_to_time_entry)
         .collect();
 
-    // sanitized_entries.iter().for_each(|entry| {
-    //     println!("{:?}", entry);
-    // });
-
     let (first_day, last_day) = find_first_date(&fixed_tyme_entries);
 
     let time_export = TimeExport {
@@ -84,24 +80,16 @@ fn main() -> Result<(), ExitFailure> {
         last_day,
     };
     let initial_directory = env::current_dir().unwrap();
-    // let mut cd = Command::new("cd");
-    // let root = Path::new("./timesheet");
-    // assert!(env::set_current_dir(&root).is_ok());
-    // println!(
-    //     "Successfully changed working directory to {}!",
-    //     root.display()
-    // );
 
-    // cd.arg("timesheet").output().expect("Failed to execute.");
-
-    let mut echo_hello = Command::new("generate_pdf");
-    let output = echo_hello
+    let mut generate_pdf_command = Command::new("generate_pdf");
+    let output = generate_pdf_command
         .arg(serde_json::to_string(&time_export).unwrap())
         .arg(initial_directory)
         .output()
         .expect("Command wasn't run successfully");
 
     println!("Starting to generate pdf.");
+    // println!("{}", serde_json::to_string(&time_export).unwrap());
     println!("status: {}", output.status);
     println!("stdout: {}", String::from_utf8_lossy(&output.stdout));
     println!("stderr: {}", String::from_utf8_lossy(&output.stderr));
@@ -115,8 +103,8 @@ fn find_first_date(entries: &Vec<TymeEntry>) -> (String, String) {
 
     let monday = first_entry.date
         + Duration::days(first_entry.date.weekday().num_days_from_monday() as i64 * -1);
-    let sunday =
-        last_entry.date + Duration::days(first_entry.date.weekday().num_days_from_sunday() as i64);
+    let sunday = last_entry.date
+        + Duration::days(6 - last_entry.date.weekday().num_days_from_monday() as i64);
 
     (
         format!("{}", monday.format(DATE_FORMAT)),
